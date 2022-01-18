@@ -98,7 +98,7 @@
       <div class="row">
         <div class="col-md-4 col-lg-2">
           <div class="campanies__logo-box shadow-sm">
-            <img src="{{asset('frontendimages//campanies/campany-1.png')}}" alt="Campany 1 logo" title="Campany 1 Logo" class="img-fluid">
+            <img src="{{asset('frontend/images//campanies/campany-1.png')}}" alt="Campany 1 logo" title="Campany 1 Logo" class="img-fluid">
           </div>
         </div>
         <div class="col-md-4 col-lg-2">

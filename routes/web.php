@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\{FrontendController, BackendController, BannerController, RelativeCompaniesController};
 
 
 /*
@@ -27,4 +27,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-// Route::resource('users', 'UsersController'); {route for a resourceful controller}
+Route::resource('banner', BannerController::class);
+Route::resource('relative_companies', RelativeCompaniesController::class);
