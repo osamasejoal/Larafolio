@@ -8,7 +8,7 @@
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>"Edit Banner", <span>Welcome Here</span></h1>
+                                <h1>"Edit Relative Companies", <span>Welcome Here</span></h1>
                             </div>
                         </div>
                     </div>
@@ -30,60 +30,54 @@
                     <div class="row">
 
                         {{-- <section class="get-in-touch"> --}}
-                        <h1 class="title m-auto">Update Your Banner</h1>
-
+                        <h1 class="title m-auto">Edit Relative Company</h1>
                         @if (session('success'))
                             <div class="alert alert-success col-12 mb-5">
                                 {{ session('success') }}
                             </div>
                         @endif
-
-                        <form action="{{ route('banner.update', $banner_edit->id) }}" method="POST"
+                        <form action="{{ route('relative_companies.update', $rc_edit->id) }}" method="POST"
                             enctype="multipart/form-data" class="contact-form row m-auto">
                             @csrf
                             @method('PUT')
                             <div class="form-field col-lg-6">
-                                <input value="{{ $banner_edit->your_name }}" name="your_name" id="your_name"
+                                <input value="{{ $rc_edit->company_name }}" name="company_name" id="company_name"
                                     class="input-text js-input" type="text">
-                                <label class="label mb-5" for="name">Your Name</label>
+                                <label class="label mb-5" for="company_name">Company Name</label>
                             </div>
-                            @error('your_name')
+                            @error('company_name')
                                 <span style="margin-top: -42px"
                                     class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
                             @enderror
-
                             <div class="form-field col-lg-12 ">
-                                <input value="{{ $banner_edit->your_bio }}" name="your_bio" id="your_bio"
-                                    class="input-text js-input" type="text">
-                                <label class="label mb-5" for="your_bio">Your Bio</label>
+                                <input value="{{ $rc_edit->company_link }}" name="company_link" id="company_link"
+                                    class="input-text js-input" type="url">
+                                <label class="label mb-5" for="company_link">Company Link</label>
                             </div>
-                            @error('your_bio')
+                            @error('company_link')
                                 <span style="margin-top: -42px"
                                     class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
                             @enderror
-
                             <div class="form-field col-lg-12">
-                                <img style="border-radius: 50%" width="150px"
-                                    src="{{ asset('uploads/banner_img' . '/' . $banner_edit->your_img) }}" alt=""
+                                <img style="height: 3rem"
+                                    src="{{ asset('uploads/relative_c_logos' . '/' . $rc_edit->company_logo) }}" alt=""
                                     id="previous_img">
-                                <label style="margin-bottom: 60px" class="label" for="previous_img">Previous
+                                <label class="label" for="previous_img">Previous
                                     Image</label>
                             </div>
 
-                            <div class="form-field col-lg-6">
+                            <div class="form-field col-lg-6 mt-5">
                                 <input name="your_img" id="your_img" class="input-text js-input" type="file">
                                 <label class="label mb-5" for="your_img">Choose your new Image</label>
                             </div>
-                            @error('your_img')
+                            @error('company_logo')
                                 <span style="margin-top: -48px"
                                     class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
                             @enderror
-
                             <div class="form-field col-lg-12">
                                 <input class="submit-btn" type="submit" value="submit" name="submit">
                             </div>
                         </form>
-                        {{-- </section> --}}
 
 
                     </div>

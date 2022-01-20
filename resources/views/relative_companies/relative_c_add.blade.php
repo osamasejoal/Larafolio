@@ -30,46 +30,54 @@
                     <div class="row">
 
                         <h1 class="title m-auto">Create Relative Companies</h1>
+                        @if (session('error'))
+                            <div class="alert alert-danger col-12">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success col-12">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <form action="{{ route('relative_companies.store') }}" method="POST" enctype="multipart/form-data"
                             class="contact-form row m-auto">
                             @csrf
-                            <div class="form-field col-lg-6">
-                                <input value="" style="margin-bottom: 65px" name="company_name" id="company_name"
-                                    class="input-text js-input" type="text" placeholder="fdsbkgc">
-                                {{-- style="margin-bottom: 65px" --}}
-                                <label class="label" for="company_name">Company Name</label>
-                                {{-- <span style="" class="text-danger d-flex">NAME field is required bla bal bla bla</span> --}}
-                            </div>
-                            <div class="form-field col-lg-12">
-                                <input value="" name="company_link" id="company_link" class="input-text js-input"
-                                    type="text">
-                                {{ $errors }}
-                                @foreach ($errors as $error)
-                                    @if (strpos($error, 'company_link'))
-                                        <span class="text-danger">ace</span>
-                                        {{-- <label style="bottom:80px" class="label" for="company_link">Company
-                                            Link</label> --}}
-                                    @else
-                                        <span class="text-danger">nai</span>
-                                        {{-- <label style="bottom:40px" class="label" for="company_link">Company
-                                            Link</label> --}}
-                                    @endif
-                                @endforeach
 
-                                @error('company_link')
-                                    <span class="text-danger d-flex" style="margin-top: 15px">{{ $message }}</span>
-                                @enderror
+                            <div class="form-field col-lg-6">
+                                <input value="{{ old('company_name') }}" name="company_name" id="company_name"
+                                    class="input-text js-input" type="text">
+                                <label style="margin-bottom: 40px" class="label" for="company_name">Company
+                                    Name *</label>
                             </div>
+                            @error('company_name')
+                                <span style="margin-top: -42px"
+                                    class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
+                            @enderror
+
+                            <div class="form-field col-lg-12">
+                                <input value="{{ old('company_link') }}" name="company_link" id="company_link"
+                                    class="input-text js-input" type="url">
+                                <label style="margin-bottom: 40px" class="label" for="company_link">Company
+                                    Link *</label>
+                            </div>
+                            @error('company_link')
+                                <span style="margin-top: -42px"
+                                    class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
+                            @enderror
                             <div class="form-field col-lg-6 mt-5">
                                 <input name="company_logo" id="company_logo" class="input-text js-input" type="file">
-                                <span class="text-danger d-flex">It must be a png</span>
-                                <label style="margin-bottom: 80px" class="label" for="company_logo">Company
-                                    Logo</label>
 
+                                <label style="margin-bottom: 60px" class="label" for="company_logo">Company
+                                    Logo *</label>
                             </div>
+                            @error('company_logo')
+                                <span style="margin-top: -48px"
+                                    class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
+                            @enderror
 
                             <div class="form-field col-lg-12">
-                                <input class="submit-btn" type="submit" value="submit" name="submit">
+                                <button type="submit" class="custom-button">Submit</button>
                             </div>
                         </form>
                         {{-- </section> --}}

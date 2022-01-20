@@ -38,12 +38,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table-wrap">
-                                    <table class="table table-responsive-xl">
+                                    <table class="table table-responsive-xl text-center">
                                         <thead>
                                             <tr>
                                                 <th>Your Image</th>
                                                 <th>Your Name</th>
-                                                <th style="margin-left: 50%">Your Bio</th>
+                                                <th class="text-center">Your Bio</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,16 +51,14 @@
                                             @foreach ($banner_data as $banner_datas)
 
                                                 <tr class="alert" role="alert">
-                                                    <td class="d-flex align-items-center">
-                                                        <div class="img">
-                                                            <img style="border-radius: 50%" src="{{ asset('uploads/banner_img') . '/' . $banner_datas->your_img }}"
+                                                    <td>
+                                                        <img style="border-radius: 50%"
+                                                            src="{{ asset('uploads/banner_img') . '/' . $banner_datas->your_img }}"
                                                             alt="img not found" width="50px">
-                                                        </div>
-                                                        
                                                     </td>
                                                     <td>{{ $banner_datas->your_name }}</td>
-                                                    <td>{{ $banner_datas->your_bio }}</td>
-                                                    
+                                                    <td class="text-center">{{ $banner_datas->your_bio }}</td>
+
                                                 </tr>
 
                                             @endforeach
@@ -70,7 +68,8 @@
                                 </div>
 
                                 <div class="mt-5 text-center">
-                                    <a class="btn btn-primary" href="{{route('banner.edit', $banner_datas->id)}}">Edit Banner</a>
+                                    <a class="btn btn-primary" href="{{ route('banner.edit', $banner_datas->id) }}">Edit
+                                        Banner</a>
                                 </div>
 
                             </div>

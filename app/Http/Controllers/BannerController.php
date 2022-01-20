@@ -74,16 +74,20 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // if ($request->hasFile('your_img')) {
-        //     $img = Image::make($request->your_img);
-        //     $img_name = auth()->id() . auth()->user()->name . Str::random('5') . "." . $request->your_img->getClientOriginalExtension();
-        //     $img->save(base_path('public/uploads/banner_img/' . $img_name));
-        //     return "done";
-        // }
-        // else{
-        //     return "not done";
-        // }
-        // die();
+
+        $request->validate([
+            'your_name' => 'required | max:25',
+            'your_bio' => 'required | max:100',
+            'your_img' => 'mimes:png',
+        ], [
+            'your_name.required' => 'Your Name is required',
+            'your_name.max' => 'It can be maximum 25 digits',
+            'your_bio.required' => 'Your Bio is required',
+            'your_bio.digits_between' => 'It can be maximum 150 digits',
+            'your_img.mimes' => 'It must to be a png file',
+        ]);
+
+
         if ($request->hasFile('your_img')) {
             unlink(base_path('public/uploads/banner_img/' . Banner::find($id)->your_img));
             $img = Image::make($request->your_img);
@@ -100,7 +104,7 @@ class BannerController extends Controller
             'your_bio' => $request->your_bio,
         ]);
 
-        return back();
+        return back()->with('success', "Successfully updated your data");
     }
 
     /**

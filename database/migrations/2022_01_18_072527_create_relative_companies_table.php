@@ -16,9 +16,10 @@ class CreateRelativeCompaniesTable extends Migration
         Schema::create('relative_companies', function (Blueprint $table) {
             $table->id();
             $table->string('company_name');
-            $table->string('company_link');
+            $table->text('company_link');
             $table->string('company_logo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

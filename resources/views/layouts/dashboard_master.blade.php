@@ -76,7 +76,7 @@
                         </a>
                         <ul>
                             <li><a href="{{ route('relative_companies.create') }}">Add Companies</a></li>
-                            <li><a href="#">View Companies</a></li>
+                            <li><a href="{{route('relative_companies.index')}}">View Companies</a></li>
                         </ul>
                     </li>
 
