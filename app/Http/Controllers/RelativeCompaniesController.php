@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 
 class RelativeCompaniesController extends Controller
 {
+
+
     // ==============================================
     // INDEX METHOD for view relative companies data
     // ==============================================
@@ -19,6 +21,7 @@ class RelativeCompaniesController extends Controller
         $rc_datas = RelativeCompanies::all();
         return view('relative_companies.relative_c_view', compact('rc_datas'));
     }
+
 
 
 
@@ -33,14 +36,13 @@ class RelativeCompaniesController extends Controller
 
 
 
+
     // ===================================================
     // STORE METHOD for storing relative companies data
     // ===================================================
 
     public function store(Request $request)
     {
-        // return $request;
-        // die();
         $request->validate([
             'company_name' => 'required',
             'company_link' => 'required | url',
@@ -55,8 +57,8 @@ class RelativeCompaniesController extends Controller
 
         $company = RelativeCompanies::all();
 
-        if ($company->count() > 4) {
-            return back()->with('error', "Can't added more than 5");
+        if ($company->count() > 5) {
+            return back()->with('error', "Can't added more than 6");
         } else {
             $img = Image::make($request->company_logo);
             $img_name = auth()->id() . auth()->user()->name . Str::random('5') . '.' . $request->company_logo->getClientOriginalExtension();
@@ -87,14 +89,18 @@ class RelativeCompaniesController extends Controller
 
 
 
-    // ===================================================
+    // =================================================
     // EDIT METHOD for updating relative companies data
-    // ===================================================
+    // =================================================
     public function edit(RelativeCompanies $relativeCompanies, $id)
     {
         $rc_edit = RelativeCompanies::find($id);
         return view('relative_companies.relative_c_edit', compact('rc_edit'));
     }
+
+
+
+
 
     // ===================================================
     // Update METHOD for updating form relative companies 
@@ -114,7 +120,7 @@ class RelativeCompaniesController extends Controller
             'company_logo.mimes' => 'It must to be a png file',
         ]);
 
-        if ($request->hasFile('your_img')) {
+        if ($request->hasFile('company_logo')) {
             unlink(base_path('public/uploads/relative_c_logos/' . RelativeCompanies::find($id)->company_logo));
             $img = Image::make($request->yourcompany_logo_img);
             $img_name = auth()->id() . auth()->user()->name . Str::random('5') . "." . $request->company_logo->getClientOriginalExtension();
@@ -131,18 +137,55 @@ class RelativeCompaniesController extends Controller
         ]);
 
         return back()->with('success', "Successfully updated your data");
-        
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RelativeCompanies  $relativeCompanies
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+    // ===================================================
+    // DESTROY METHOD for deleting relative companies data
+    // ===================================================
     public function destroy(RelativeCompanies $relativeCompanies, $id)
     {
-        return "Delete";
+        RelativeCompanies::find($id)->delete();
+        return back();
     }
+
+
+
+
+    // =====================================================
+    // TRASH METHOD for view deleted relative companies data
+    // =====================================================
+    public function trash()
+    {
+        $trashed = RelativeCompanies::onlyTrashed()->get();
+        return view('relative_companies.relative_c_trash', compact('trashed'));
+    }
+
+
+
+
+    // ===================================================================
+    // FORCE DELETE METHOD for permanently deleted relative companies data
+    // ===================================================================
+    public function force_delete($id)
+    {
+        unlink(base_path('public/uploads/relative_c_logos/' . RelativeCompanies::onlyTrashed()->find($id)->company_logo));
+        RelativeCompanies::onlyTrashed()->find($id)->forceDelete();
+        return back();
+    }
+
+
+
+    public function restore($id){
+        RelativeCompanies::onlyTrashed()->find($id)->restore();
+        return back();
+    }
+
+
+
+
+
+
 }

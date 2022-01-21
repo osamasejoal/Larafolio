@@ -8,7 +8,7 @@
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>"View Relative Companies", <span>Welcome Here</span></h1>
+                                <h1>"Trash Relative Companies", <span>Welcome Here</span></h1>
                             </div>
                         </div>
                     </div>
@@ -39,28 +39,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($rc_datas as $rc_data)
+                                    @forelse ($trashed as $trash)
                                         <tr class="text-center">
                                             <td style="vertical-align: middle" class="w-25">
-                                                <img style="vertical-align: middle; height: 2rem"
-                                                    src="{{ asset('uploads/relative_c_logos' . '/' . $rc_data->company_logo) }}"
+                                                <img style="vertical-align: middle; height: 3rem"
+                                                    src="{{ asset('uploads/relative_c_logos' . '/' . $trash->company_logo) }}"
                                                     class="img-fluid" alt="Sheep">
                                             </td>
-                                            <td style="vertical-align: middle">{{ $rc_data->company_name }}</td>
                                             <td style="vertical-align: middle">
-                                                {{ $rc_data->company_link }}
+                                                {{ $trash->company_name }}
                                             </td>
-                                            <td style="vertical-align: middle" class="text-center col-2">
-                                                <a href="{{ route('relative_companies.edit', $rc_data->id) }}"
-                                                    class="btn btn-info btn-sm mr-2">Edit</a>
+                                            <td style="vertical-align: middle">
+                                                {{ $trash->company_link }}
+                                            </td>
+                                            <td style="vertical-align: middle" class="text-center col-3">
 
-                                                <form class="d-inline" action="{{route('relative_companies.destroy', $rc_data->id)}}" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button class="btn btn-danger btn-sm">
-                                                        Delete
-                                                    </button>
-                                                </form>
+                                                    <a href="{{route('rc-restore', $trash->id)}}" class="btn btn-primary btn-sm mr-2">Restore</a>
+
+                                                    <a href="{{route('rc-force-delete', $trash->id)}}" class="btn btn-danger btn-sm">Force Delete</a>
                                                 
                                             </td>
                                         </tr>
@@ -69,9 +65,6 @@
                                             <td class="text-center text-danger" colspan="50">No Companies to show here</td>
                                         </tr>
                                     @endforelse
-                                    {{-- @foreach ($rc_datas as $rc_data)
-                                        
-                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>

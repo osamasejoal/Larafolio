@@ -77,6 +77,7 @@
                         <ul>
                             <li><a href="{{ route('relative_companies.create') }}">Add Companies</a></li>
                             <li><a href="{{route('relative_companies.index')}}">View Companies</a></li>
+                            <li><a href="{{route('rc-trash')}}">Trash</a></li>
                         </ul>
                     </li>
 

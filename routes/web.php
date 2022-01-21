@@ -25,7 +25,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
 Route::resource('banner', BannerController::class);
 Route::resource('relative_companies', RelativeCompaniesController::class);
+Route::get('rc/trash', [RelativeCompaniesController::class, 'trash'])->name('rc-trash');
+Route::get('rc/restore/{id}', [RelativeCompaniesController::class, 'restore'])->name('rc-restore');
+Route::get('rc/force/delete/{id}', [RelativeCompaniesController::class, 'force_delete'])->name('rc-force-delete');
