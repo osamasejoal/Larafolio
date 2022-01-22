@@ -81,6 +81,19 @@
                         </ul>
                     </li>
 
+                    <li>
+                        <a class="sidebar-sub-toggle" href="#">
+                            <i class="ti-menu-alt"></i>
+                            Services
+                            <span class="sidebar-collapse-icon ti-angle-down"></span>
+                        </a>
+                        <ul>
+                            <li><a href="{{route('services.create')}}">Add Services</a></li>
+                            <li><a href="{{route('services.index')}}">View Services</a></li>
+                            <li><a href="#">Trash</a></li>
+                        </ul>
+                    </li>
+
 
                     {{-- <li>
                         <a class="sidebar-sub-toggle" href="#">
@@ -367,6 +380,17 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {{-- END Script for Form in Banner/Edit --}}
+
+
+
+
+
+        @yield('scripts')
+
+
+
+
+
 </body>
 
 </html>

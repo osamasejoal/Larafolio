@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{FrontendController, BackendController, BannerController, RelativeCompaniesController};
-
+use App\Http\Controllers\{FrontendController, BackendController, BannerController, RelativeCompaniesController, ServicesController};
+use App\Models\Services;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +30,5 @@ Route::resource('relative_companies', RelativeCompaniesController::class);
 Route::get('rc/trash', [RelativeCompaniesController::class, 'trash'])->name('rc-trash');
 Route::get('rc/restore/{id}', [RelativeCompaniesController::class, 'restore'])->name('rc-restore');
 Route::get('rc/force/delete/{id}', [RelativeCompaniesController::class, 'force_delete'])->name('rc-force-delete');
+
+Route::resource('services', ServicesController::class);

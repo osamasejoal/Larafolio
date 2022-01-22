@@ -178,6 +178,9 @@ class RelativeCompaniesController extends Controller
 
 
 
+    // ===================================================================
+    // RESTORE METHOD for restore from trash relative companies data
+    // ===================================================================
     public function restore($id){
         RelativeCompanies::onlyTrashed()->find($id)->restore();
         return back();

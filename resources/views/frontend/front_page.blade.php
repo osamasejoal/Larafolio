@@ -109,7 +109,7 @@
                 <div class="row d-flex justify-content-around">
                     @foreach (relative_companies_helper() as $rc_helper)
                         <div class="col-md-4 col-lg-2">
-                            <a target="blank" href="{{$rc_helper->company_link}}">
+                            <a target="blank" href="{{ $rc_helper->company_link }}">
                                 <div class="campanies__logo-box shadow-sm">
                                     <img src="{{ asset('uploads/relative_c_logos') . '/' . $rc_helper->company_logo }}"
                                         alt="Campany logo" title="{{ $rc_helper->company_name }}"
@@ -118,35 +118,6 @@
                             </a>
                         </div>
                     @endforeach
-
-
-
-                    {{-- <div class="col-md-4 col-lg-2">
-          <div class="campanies__logo-box shadow-sm">
-            <img src="{{asset('frontend/images/campanies/campany-2.png')}}" alt="Campany 2 logo" title="Campany 2 Logo" class="img-fluid">
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-2">
-          <div class="campanies__logo-box shadow-sm">
-            <img src="{{asset('frontend/images/campanies/campany-3.png')}}" alt="Campany 3 logo" title="Campany 3 Logo" class="img-fluid">
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-2">
-          <div class="campanies__logo-box shadow-sm">
-            <img src="{{asset('frontend/images/campanies/campany-4.png')}}" alt="Campany 4 logo" title="Campany 4 Logo" class="img-fluid">
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-2">
-          <div class="campanies__logo-box shadow-sm">
-            <img src="{{asset('frontend/images/campanies/campany-5.png')}}" alt="Campany 5 logo" title="Campany 5 Logo" class="img-fluid">
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-2">
-          <div class="campanies__logo-box shadow-sm">
-            <img src="{{asset('frontend/images/campanies/campany-6.png')}}" alt="Campany 6 logo" title="Campany 6 Logo" class="img-fluid">
-          </div>
-        </div> --}}
-
 
                 </div>
             </div>
@@ -185,30 +156,61 @@
         <!-- START THE CONTENT FOR THE SERVICES  -->
         <div class="container">
             <!-- START THE MARKETING CONTENT  -->
-            <div class="row">
+
+            @foreach ($servalues as $servalue)
+            @if ($servalue->serial == 1)
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4">
+                        <div class="services__content">
+                            <div class="icon d-block {{$servalue->service_icon}}"></div>
+                            {{-- fas fa-paper-plane --}}
+                            <h3 class="display-3--title mt-1">{{$servalue->service_name}}</h3>
+                            <p class="lh-lg">
+                                {{$servalue->service_description}}
+                            </p>
+                            <button type="button" class="rounded-pill btn-rounded border-primary">Learn more
+                                <span><i class="fas fa-arrow-right"></i></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4 text-end">
+                        <div class="services__pic">
+                            <img src="{{ asset('uploads/services_img') . '/' . $servalue->service_img }}"
+                                alt="marketing illustration" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            @elseif ($servalue->serial == 2)
+                <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4 text-start">
+                    <div class="services__pic">
+                        <img src="{{ asset('uploads/services_img') . '/' . $servalue->service_img }}"
+                            alt="web development illustration" class="img-fluid">
+                    </div>
+                </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4">
                     <div class="services__content">
-                        <div class="icon d-block fas fa-paper-plane"></div>
-                        <h3 class="display-3--title mt-1">Marketing</h3>
+                        <div class="icon d-block {{$servalue->service_icon}}"></div>
+                        <h3 class="display-3--title mt-1">{{$servalue->service_name}}</h3>
                         <p class="lh-lg">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, impedit rem,
-                            doloremque autem quibusdam blanditiis harum alias hic accusantium
-                            maxime atque ratione magni repellat?
+                            {{$servalue->service_description}}
                         </p>
                         <button type="button" class="rounded-pill btn-rounded border-primary">Learn more
                             <span><i class="fas fa-arrow-right"></i></span>
                         </button>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4 text-end">
-                    <div class="services__pic">
-                        <img src="{{ asset('frontend/images/services/service-1.png') }}" alt="marketing illustration"
-                            class="img-fluid">
-                    </div>
-                </div>
             </div>
+            @endif
+                
+            @endforeach
+
+
+
+
+
             <!-- START THE WEB DEVELOPMENT CONTENT  -->
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4 text-start">
                     <div class="services__pic">
                         <img src="{{ asset('frontend/images/services/service-2.png') }}"
@@ -229,9 +231,9 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- START THE CLOUD HOSTING CONTENT  -->
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services mt-4">
                     <div class="services__content">
                         <div class="icon d-block fas fa-cloud-upload-alt"></div>
@@ -252,7 +254,10 @@
                             alt="cloud hosting illustration" class="img-fluid">
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+
+
         </div>
     </section>
 
